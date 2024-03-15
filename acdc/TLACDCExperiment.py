@@ -7,14 +7,14 @@ from typing import Callable, Optional, Literal, List, Dict, Any, Tuple, Union, S
 import random
 from dataclasses import dataclass
 import torch
-from acdc.acdc_graphics import show
+#from acdc.acdc_graphics import show
 from torch import nn
 from torch.nn import functional as F
 from acdc.TLACDCInterpNode import TLACDCInterpNode
 from acdc.TLACDCCorrespondence import TLACDCCorrespondence
 from transformer_lens.HookedTransformer import HookedTransformer
 from acdc.global_cache import GlobalCache
-from acdc.acdc_graphics import log_metrics_to_wandb
+#from acdc.acdc_graphics import log_metrics_to_wandb
 import warnings
 import wandb
 from acdc.acdc_utils import extract_info, shuffle_tensor
@@ -653,20 +653,20 @@ class TLACDCExperiment:
                 print("Removing redundant node", self.current_node)
             self.remove_redundant_node(self.current_node)
 
-        if is_this_node_used and self.current_node.incoming_edge_type.value != EdgeType.PLACEHOLDER.value:
-            fname = f"ims/img_new_{self.step_idx}.png"
-            show(
-                self.corr,
-                fname=fname,
-                show_full_index=self.show_full_index,
-            )
-            if self.using_wandb:
-                try:
-                    wandb.log(
-                        {"acdc_graph": wandb.Image(fname),}
-                    )
-                except Exception as e:
-                    pass # Usually a race condition when running many jobs. It's fine to not log an image.
+        #if is_this_node_used and self.current_node.incoming_edge_type.value != EdgeType.PLACEHOLDER.value:
+        #    fname = f"ims/img_new_{self.step_idx}.png"
+        #    show(
+        #        self.corr,
+        #        fname=fname,
+        #        show_full_index=self.show_full_index,
+        #    )
+        #    if self.using_wandb:
+        #        try:
+        #            wandb.log(
+        #                {"acdc_graph": wandb.Image(fname),}
+        #            )
+        #        except Exception as e:
+        #            pass # Usually a race condition when running many jobs. It's fine to not log an image.
 
         # increment the current node
         self.increment_current_node()
